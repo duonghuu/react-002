@@ -10,7 +10,7 @@ class List extends Component {
 
   render() {
     const eleItems = this.props.items.map((item,index) => (
-      <Item item={item} index={index} key={index}/>
+      <Item onHandleDelete={this.props.onHandleDelete} item={item} index={index} key={index}/>
     ))
     return (
         <div className="panel panel-success">

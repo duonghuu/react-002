@@ -14,8 +14,9 @@ class Control extends Component {
     this.props.onSearchGoApp(value);
   }
   render() {
+    let {orderBy,orderDir,isShowForm}  = this.props;
     let elmButton = <button type="button" onClick={this.handleAddTask} className="btn btn-info btn-block">Add Task</button>
-    if (this.props.isShowForm) {
+    if (isShowForm) {
       elmButton = <button type="button" onClick={this.handleAddTask} className="btn btn-success btn-block">Close Form</button>
     }
     return (
@@ -25,7 +26,11 @@ class Control extends Component {
           {/* SEARCH : END */}
 
           {/* SORT : START */}
-          <Sort />
+          <Sort 
+          orderBy={orderBy}  
+          orderDir={orderDir}  
+          onHandleSort={this.props.onHandleSort}  
+          />
           {/* SORT : END */}
 
           {/* ADD : START */}
