@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 class Form extends Component {
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+    this.closeForm = this.closeForm.bind(this)
+  }
+  closeForm() {
+    this.props.onCloseForm()
+  }
   render() {
     return (
         <div className="row">
@@ -19,7 +27,7 @@ class Form extends Component {
                 </select>
               </div>
               <button type="button" className="btn btn-primary">Submit</button>
-              <button type="button" className="btn btn-default">Cancel</button>
+              <button type="button" onClick={this.closeForm} className="btn btn-default">Cancel</button>
             </form>
           </div>
         </div>
