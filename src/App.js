@@ -5,6 +5,7 @@ import Form from './components/Form';
 import List from './components/List';
 import tasks from "./mocks/tasks";
 import { filter, includes, orderBy as funcOrderBy, remove } from 'lodash';
+const { v4: uuidv4 } = require('uuid');
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +21,7 @@ class App extends Component {
     this.handleSearchGoApp = this.handleSearchGoApp.bind(this)
     this.handleSort = this.handleSort.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleAddTask = this.handleAddTask.bind(this)
   }
   handleToggleForm(){
     this.setState({
@@ -54,6 +56,20 @@ class App extends Component {
     });
     
   }
+  handleAddTask(item){
+    console.log(item);
+    let items = this.state.items;
+    let objInfo = {
+      id: uuidv4(),
+      name: item.name,
+      level: +item.level,
+    }
+    items.push(objInfo);
+    this.setState({
+      "items": items,
+    });
+    
+  }
   render() {
     let oRiGinItems = [...this.state.items];
     let items = [];
@@ -72,7 +88,9 @@ class App extends Component {
     items = funcOrderBy(items, [orderBy], [orderDir]);
     let elmForm = null;
     if (isShowForm) {
-      elmForm = <Form onCloseForm={this.handleCloseForm} />;
+      elmForm = <Form 
+                  onAddTask={this.handleAddTask}
+                  onCloseForm={this.handleCloseForm} />;
     }
     return (
       <div >
